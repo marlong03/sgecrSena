@@ -1,0 +1,30 @@
+<section class="inicioSesion__container">
+    <div class="divisionLogo">
+        <img src="../../../assets/imgs/logo.png" alt="">
+    </div>
+        <div class="container__inicioSesion">
+            <div class="d-flex justify-content-between">
+                <div class="mx-2">
+                    <p (click)="direccionarUrl('')"><span  class="py-2"><img width="25px" src="../../../assets/imgs/volver.png" alt=""></span></p>
+                </div>
+                <div>
+                    <h2>Registrate</h2>
+                </div>
+            </div>
+            <form>
+                <input type="text" placeholder="Nombre completo*" id="nombreCompleto" name="nombreCompleto" [(ngModel)]="nombreCompleto">
+                <input type="tel" placeholder="Telefono*" id="telefono" name="telefono" [(ngModel)]="telefono">
+                <input type="email" placeholder="Email*" id="email" name="email" [(ngModel)]="email">
+                <input type="password" placeholder="Contraseña*"name="password" id="password" [(ngModel)]="password">
+                <input type="password" placeholder="Confirma Contraseña*"name="passwordConfirm" id="passwordConfirm" [(ngModel)]="passwordConfirm">
+                <input type="text" placeholder="Direccion residencial" [(ngModel)]="direccion" name="direccion">
+            </form>
+            <button class="btn" id="btnRegistro" (click)="validarCamposUsuario()">Enviar</button>
+            <div class="d-flex">
+                <p>¿Tienes una cuenta?<span (click)="direccionarUrl('login')"> Inicia sesion aquí</span></p>
+                <span class="mx-3 text-light">|</span>
+                <p>¿Eres Empleado?<span (click)="direccionarUrl('registroEmpleado')"> Registrate aquí</span></p>
+            </div>
+            
+        </div>
+</section> 

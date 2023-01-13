@@ -1,0 +1,43 @@
+<section class="m-4 d-flex flex-column">
+    <div class="title__table d-flex justify-content-center">
+        <h3>{{tituloSectionInput}}</h3>
+      </div>
+      <div>
+
+    <div class="d-flex justify-content-between align-items-center mx-3">
+        <mat-form-field >
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="filtrarRoles($event)" placeholder="Buscar">
+        </mat-form-field>
+        <div>
+          <input type="button" value="Exp PDF" class="btn btn-danger mx-1"   (click)="generarPdf('excel-table-roles')">
+          <input type="button" value="Exp Excel" class="btn btn-success"  (click)="exportexcel()">
+
+
+        </div>
+      </div>
+      
+      <div class="mat-elevation-z8 mt-3">
+          <table mat-table  class="w-100"[dataSource]="dataSourceRoles" matSort id="excel-table-roles" > 
+        
+            <ng-container matColumnDef="nombrerol">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let element" id="{{element.nombre}}"> {{element.nombre}}  </td>
+            </ng-container>
+            <ng-container matColumnDef="codigoEmpresarial">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo empresarial </th>
+                <td mat-cell *matCellDef="let element" id="{{element.codigoEmpresarial}}"> {{element.codigoEmpresarial}}  </td>
+              </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsRoles"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsRoles;"></tr>
+          </table>
+        
+          <mat-paginator [pageSizeOptions]="[3, 5,10,20]" showFirstLastButtons 
+                         aria-label="Select page of periodic elements">
+          </mat-paginator>
+        </div>
+      </div>
+
+        
+
+</section>

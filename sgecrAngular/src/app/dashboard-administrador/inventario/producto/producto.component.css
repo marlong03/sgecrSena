@@ -1,0 +1,15 @@
+.title__table h3{
+    border-bottom: 3px solid #ffcb3b;
+    padding: 0px 20px 7px 20px;
+    color:#787878;
+}
+.container__edit img{
+    width: 33px;
+    height: 33px;
+    background-color: green;
+    padding: 4px;
+    border-radius: 5px;
+}
+.container__edit{
+    cursor: pointer;
+}

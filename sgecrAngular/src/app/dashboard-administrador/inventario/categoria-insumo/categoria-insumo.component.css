@@ -1,0 +1,96 @@
+*{
+    font-family: 'Exo 2', sans-serif;
+  
+  }
+  table {
+      width: 100%;
+  }
+  th.mat-sort-header-sorted {
+      color: black;
+    }
+    .tdMod{
+      min-height:49px;
+    }
+    .container__material--table{
+      width: 90%;
+      margin: 0 auto;
+    }
+  .modal {
+      display: none; /* Hidden by default */
+      position:fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      justify-content: center;
+      padding: 25px 0;
+  }
+    .modal-content {
+      position: absolute; /* Stay in place */
+      left: 0;
+      right: 0;
+      background-color: #fefefe;
+      margin: 0 auto; /* 15% from the top and centered */
+      padding: 30px 50px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+  }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 38px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .modal .container__form input{
+      padding:5px 10px;
+    }
+  .container__inputs input{
+      max-width: 250px;
+  }
+  .container__inputs div{
+      margin:10px;
+  }
+  .container__inputs label{
+      font-size: 13px;
+      margin-left: 10px;
+  }
+  .title__detallePedido{
+    padding:5px;
+    border-bottom: 3px solid #198754;
+    border-radius: 5px ;
+  }
+  .btn__borrar{
+    width:32px;
+    margin-left: 35px;
+    cursor:pointer;
+    background-color: #f4f4f4;
+    box-shadow: 0px 0px 5px #d4d4d4;
+    border-radius: 100px;
+    padding:4px;
+  }
+  .btn__borrar:hover{
+    box-shadow: 0px 0px 8px #c4c4c4;
+    background-color: #fff;
+  
+  }
+  .container__form h2{
+    padding-bottom: 5px;
+    border-bottom: 3px solid green;
+  }
+  .section__crearCategoria h4{
+    padding-bottom: 5px;
+    border-bottom: 3px solid green;
+  }
+  .btn__borrar img{
+    width: 25px;
+  }

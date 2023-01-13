@@ -1,0 +1,52 @@
+
+<div id="myModal" class="modal" [style.display]="displayBlock">
+    <div class="modal-content">
+      <span class="close" (click)="cerrarModal()">&times;</span>
+      <section class="container__form d-flex justify-content-center">
+        <h2 *ngIf="actualizarInsumo == 'false'" class="text-center">Crear Insumo</h2>
+        <h2  *ngIf="actualizarInsumo == 'true'" class="text-center">Actualizar Insumo</h2>
+      </section>
+      <section class="d-flex justify-content-center flex-column align-items-center">
+      </section>
+      <section > <!-- *ngIf="aparecerSeccionOrdenPedido" -->
+        <div class=" mt-4 mx-2" >
+          <h5 class=" text-center ">📦 Por favor Ingrese los datos del insumo:</h5>
+          <section class="d-flex justify-content-center flex-column align-items-center my-4" >
+            <form action="" class="d-flex justify-content-center flex-wrap">
+                <div class="mx-2">
+                    <input type="text" class="m-2 form-control" placeholder="Nombre*" name="nombre" [(ngModel)]="nombre">
+                    <input type="text" class="m-2 form-control" placeholder="Unidad*" name="unidad" [(ngModel)]="unidad">
+                    <input type="number" class="m-2 form-control" placeholder="Cantidad*" min="1" name="cantidad" [(ngModel)]="cantidad">
+                </div>
+                <div class="mx-2">
+                    <input type="number" class="m-2 form-control" placeholder="Precio Unitario*"  name="precioUnitario" [(ngModel)]="precioUnitario">
+                   <select class="form-select mx-2" aria-label="Default select example" [(ngModel)]="idCategoria" name="idCategoria">
+                    <option value="">Seleccione Categoria...</option>
+                    <option value="{{cat.idcategoriainsumos}}" *ngFor="let cat of listaNombresCategoriasInsumos">{{cat.nombrecategoria}}</option>
+                  </select>
+                </div>
+            </form>  
+          </section>
+        </div>
+      </section>
+      <div class="d-flex justify-content-center mb-2 ">
+        <small >(*) - Campo obligatorio</small>
+      </div>
+      <section>
+        <div class="d-flex justify-content-center importarExcel">
+          <input type="file" [style.display]="displayBtnImportarExcel" class=" w-50 form-control form-control-sm mb-2" (change)="importarExcel($event)">
+       </div>
+        <div class="d-flex justify-content-center">
+            <input *ngIf="actualizarInsumo == 'false'" type="button" value="Crear insumo" class="btn btn-success px-5 my-3" (click)="crearInsumo()" >
+            <input *ngIf="actualizarInsumo == 'true'" type="button" value="Actualizar insumo" class="btn btn-success px-5 my-3 mx-2" (click)="modificarInsumo()">
+            <input *ngIf="actualizarInsumo == 'true'" type="button" value="Eliminar insumo"  class="btn btn-danger px-5 my-3 mx-2" (click)="eliminarInsumo()">
+            <input *ngIf="actualizarInsumo == 'false'" type="button" value="Importar Excel" class="btn btn-primary  my-3 mx-2" (click)="changeStateDisplayBtnImportarExcel()">
+          </div>
+      </section>
+    </div>
+  </div>
+<section class="container__material--table">
+    <div>
+      <input type="button" value="Añadir Insumo" class="btn btn-primary px-3" (click)="abrirModal('anadir')">
+    </div>
+</section>

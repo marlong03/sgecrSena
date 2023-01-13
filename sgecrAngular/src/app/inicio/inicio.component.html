@@ -1,0 +1,192 @@
+<div class="container__saludo" *ngIf="displayClientes">
+    <h5 class="text-light">¡Hola <span class="text-warning">{{nombreUsuarioSesion}}</span>!</h5>
+</div>
+<section class="menu__bar" (click)="cerrarNavbar($event)"  #menunavbar [style.display]="displayon" ngClass="animationon" *ngIf="displayClientes"><!--  -->
+    <nav (click)="seleccionarSectionPintarEnModal($event)">
+        <ul>
+            <li (click)="abrirModal1()"> Editar perfil </li>
+            <li (click)="traerPedidos('pendiente')"> Pedidos Pendientes </li>
+            <li (click)="traerPedidos('entregado')">Pedidos Realizados</li>
+        </ul>
+     </nav>
+</section>
+<div class="container__menu"  *ngIf="displayClientes">
+    <span ><img class="" (click)="ejecutarNavbar()" src="../../assets/imgs/menu.png" alt=""></span> <!-- (click)="ejecutarNavbar()" -->
+</div>
+<section class="container__inicio">
+    <header class="d-flex justify-content-center align-items-center flex-column py-3">
+        <img src="../../assets/imgs/logo.png" alt="" class="logoHeader">
+        <input type="button" *ngIf="displayClientes == false" value="Iniciar Sesión" class="btn btn-warning px-5 py-2 my-2 " (click)="direccionarUrl('login')">
+        <input  *ngIf="displayClientes" type="button" value="Cerrar Sesión" class="btn btn-light px-5 py-2 my-2 " (click)="cerrarSesion()">
+    </header>
+    <main >
+        <section class="section__title py-5 d-flex justify-content-center flex-column">
+            <h1 class="text-center mt-5 mb-3 "><span>FONTI</span><span>BURGU</span><span>ER</span></h1>
+            <h2 class="text-center mb-5">🍕🍔🍟🌭🥪🌮🍕🍔🍟🌭</h2>
+        </section>
+        <section class="container_menu d-flex justify-content-center mx-auto flex-column mt-5 mb-0">
+            <div class="container__title d-flex justify-content-center">
+                <h2 class="text-center subtitulo">Menú</h2>
+            </div>
+            <div class="container__categorias d-flex justify-content-center flex-wrap mx-auto  pb-5 flex-wrap">
+               
+                <div class="card__categoria" (click)="abrirModal('hamburguesas')" *ngFor="let cat of listaCategoriasProductos" (click)="traerProductosDeCategoriaProducto(cat)">
+                    <div class="d-flex justify-content-center ">
+                        <h3 class="text-light text-center my-5 mx-4">{{cat.nombreCategoriaProducto}}</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="mt-4"> _</div>
+        </main>
+</section>
+<footer  id="contacto" class=" p-2 d-flex flex-wrap justify-content-center ">
+    <div class="container__footer--left p-4 flex-column mx-4">
+        <div class="container__logo">
+            <img src="../../assets/imgs/logo2.png" alt="">
+        </div>
+        <div class="redes ">
+            <div class="container__nequidaviplata ">
+                <h4 class="text-danger">NEQUI | DAVIPLATA</h4>
+            </div>
+            <div>
+                <p>3214321243</p>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+    <div class="form__container">
+        <form class="form mt-3" >
+            <h3>Contactanos!</h3>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Nombre" required name="nombreEnvioCorreo" [(ngModel)]="nombreEnvioCorreo">
+            <div class="input-group mb-2 mr-sm-2">
+              
+              <input type="email" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Email" name="correoEnvioCorreo"[(ngModel)]="correoEnvioCorreo" required>
+            </div>
+            <div class="form-check mb-0 mr-sm-0">
+              <textarea name="mensajeEnvioCorreo" id="" cols="30" rows="5" placeholder="¡Cuentanos!" required [(ngModel)]="mensajeEnvioCorreo"></textarea>
+            </div>
+            <button type="enviar" id="btnEnviarContactanos" class="btn btn-dark mb-2 px-3 py-2" (click)="enviarCorreo()">Enviar</button>
+          </form>
+    </div>
+</footer>
+<section class="text-center w-100 bg-dark text-muted"> <small>© 2022|Aviso legal | Derechos reservados</small></section>
+<div id="myModal" class="modal" [style.display]="displayBlock">
+    <div class="modal-content">
+        <span class="close" (click)="cerrarModal()">&times;</span>
+        <div class="d-flex justify-content-center">
+            <h3 class="subtitulo text-center mb-2 mt-0">{{nombreCategoriaModal}}</h3>
+        </div>
+        <section class="container__productos d-flex justify-content-center flex-wrap align-items-center" (click)="anadirProductoAOrden($event)">
+            <div class="card__producto d-flex flex-column justify-content-center align-items-center" *ngFor="let producto of listaProductosSubMenu">
+                <div class="title__producto py-2">
+                    <h4>{{producto.nombreproducto}}</h4>
+                </div>
+                <div class="descripcion__producto">
+                    <p class="text-center py-1">{{producto.descripcionproducto}}</p>
+                    <hr>
+                    <p class="text-center text-light  py-1">${{producto.valorproducto}}</p>
+                </div>
+                <div class="acciones__producto d-flex justify-content-center" *ngIf="displayClientes">
+                    <input type="button" class="form-control btn btn-success p-2 m-1" value="Añadir al carrito">
+                    <input type="number" class="form-control p-1 m-1"  value=1 min=1>
+                </div>
+            </div>
+        </section>
+    </div>
+  </div>
+  <div id="myModal2" class="modal" [style.display]="displayBlock1">
+    <div class="modal-content text-light">
+        <span class="close" (click)="cerrarModal1()">&times;</span>
+        <app-editar-perfil #editarPerfil class="editarPerfilComponent" *ngIf="nombreSectionPintar.toLowerCase() == 'editar perfil'"  (textoEmitido)="actualizar($event)"></app-editar-perfil>
+        <section class="container__pedidos mx-auto d-flex justify-content-center flex-wrap flex-column" *ngIf="nombreSectionPintar.toLowerCase() == 'pedidos pendientes' || nombreSectionPintar.toLowerCase() == 'pedidos realizados'">
+            <div class="d-flex justify-content-center">
+                <h2 class="subtitulo text-center">{{nombreSectionPintar}}</h2>
+            </div>
+            <div *ngIf="listaPedidos.length <= 0">
+                <h1 class="text-center">Todavia no tienes pedidos 😅</h1>
+            </div>
+            <div class="d-flex justify-content-center flex-wrap mx-auto" (click)="escogerPedido($event)">
+            <article class="pedido bg-success" *ngFor="let p of listaPedidos">
+                <table class="w-100" >
+                    <tr class="border-bottom border-secondary text-center">
+                        <td class="py-2 bg-secondary text-light">Referencia</td>
+                        <td class="py-2 bg-light text-dark">{{p.referenciapedido}}</td>
+                    </tr>
+                    <tr class="border-bottom border-secondary text-center">
+                        <td class="py-2 bg-secondary text-light">Det.Destino</td>
+                        <td class="py-2 bg-light text-dark">{{p.detalledestinopedido}}</td>
+                    </tr>
+                    <tr class="border-bottom border-secondary text-center">
+                        <td class="py-2 bg-secondary text-light">Precio</td>
+                        <td class="py-2 bg-light text-dark">${{p.valorpedido}}</td>
+                    </tr>
+                </table>
+                    <div class="d-flex align-items-center">
+                        <input type="button" class="btn btn-success w-100 py-4" value="Ver detalles" (click)="abrirModalDetallePedido()">
+                    </div>
+            </article>
+            </div>
+        </section>
+    </div>
+  </div>
+  <section class="modal__detallePedido "[style.display]="displayModalDetalle" ngClass="animation">
+    <div class="modal__header">
+        <span class="header__cerrarModal" (click)="abrirModalDetallePedido()" >&times;</span>
+    </div>
+    <div>
+        <div class="text-center container__title">
+            <div class="d-flex justify-content-center">
+                <h2>Detalle pedido 📦</h2>
+            </div>
+        </div>
+        <div class="container__form d-flex justify-content-center my-5">
+            <table class="" >
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Referencia</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.referenciapedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center" >
+                    <td class="py-2 bg-secondary text-light">Telefono</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.telefonopedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center" >
+                    <td class="py-2 bg-secondary text-light">Destino</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.destinopedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Detalle destino</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.detalledestinopedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Fecha</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.fechapedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Decripcion</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.descripcionpedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Observacion</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.observacionpedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Precio</td>
+                    <td class="py-2 bg-light">${{pedidoDetalle.valorpedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center" >
+                    <td class="py-2 bg-secondary text-light">Estado</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.estadopedido}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+  <div (click)="carrito.llenarTablaOrden()" *ngIf="displayClientes">
+    <span class="container__carrito d-flex justify-content-center align-items-center" (click)="carrito.abrirModal()">
+    <img src="../../assets/imgs/carrito-de-compras.png" alt="" id="carritoImg">
+  </span>
+</div>
+<app-carrito #carrito [listaOrden]="listaOrden" [valorTotalOrdenes]="valorTotalOrdenes" (textoEmitido)="actualizar($event)"></app-carrito>
+

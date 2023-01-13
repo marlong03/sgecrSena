@@ -1,0 +1,61 @@
+*{
+    font-family: 'Exo 2', sans-serif;
+}
+h2{
+    border-bottom: 3px solid green;
+}
+.pedido{
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 10px #c6c6c6;
+    height: 200px;
+    margin: 20px;
+}
+.pedido table tr:first-child td:first-child{
+    border-top-left-radius: 10px;
+    width: 50px;
+}
+.pedido table tr:first-child td:nth-child(2){
+    border-top-right-radius: 10px;
+}
+.container__title h2{
+    border-bottom: 3px solid green;
+    padding-bottom: 15px;
+
+}
+.modal__header{
+    padding: 10px 30px ;
+
+}
+.modal__detallePedido{
+    width: 100%;
+    height: 600px;
+    background-color: #f6f6f6;
+    position: fixed;
+    top:0;
+    z-index: 12;
+    overflow: auto; /* Enable scroll if needed */
+
+}
+.div__container-article{
+    min-height: 300px;
+}
+article{
+    height: 100%;
+}
+.modal__header{
+    display: flex;
+    align-items: center;
+}
+.header__cerrarModal{
+    font-size: 60px;
+    cursor: pointer;
+}
+@keyframes subir {
+    0%{top:600px;}
+    100%{top:0px;}
+}
+.animation{
+    animation: subir .5s ease;
+}
+

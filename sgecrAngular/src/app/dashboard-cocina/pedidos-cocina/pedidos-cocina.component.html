@@ -1,0 +1,87 @@
+<div class="p-2 text-center">
+    <div class="d-flex justify-content-center mb-4 mt-2">
+        <h2 class="py-3">{{title}} 📦</h2>
+    </div>
+</div>
+<section class="container__pedidos d-flex justify-content-center flex-wrap mb-5">
+    <div *ngIf="listaPedidos.length <= 0">
+        <h1 class="text-center">Todavia no tienes pedidos 😅</h1>
+    </div>
+    <div *ngFor="let p of listaPedidos" (click)="escogerPedido($event)" class="my-3  ">
+    <article class="pedido bg-success h-100 ">
+        <table class="w-100 h-75" >
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Referencia</td>
+                    <td class="py-2 bg-light">{{p.referenciapedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Descripcion</td>
+                    <td class="py-2 bg-light">{{p.descripcionpedido}}</td>
+                </tr>
+            </table>
+            <div class="d-flex align-items-center">
+                <input type="button" class="btn btn-success w-100 py-2" value="Ver detalles" (click)="abrirModalDetallePedido()">
+            </div>
+        </article>
+    </div>
+</section>
+<section class="modal__detallePedido "[style.display]="displayModal" ngClass="animation">
+    <div class="modal__header">
+        <span class="header__cerrarModal" (click)="abrirModalDetallePedido()" >&times;</span>
+    </div>
+    <div>
+        <div class="text-center container__title">
+            <div class="d-flex justify-content-center">
+
+                <h2>Detalle pedido 📦</h2>
+            </div>
+        </div>
+        <div class="container__form d-flex justify-content-center my-5">
+            <table class="" >
+
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Referencia</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.referenciapedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Destino</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.destinopedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Direccion</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.detalledestinopedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Telefono</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.telefonopedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Fecha</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.fechapedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Decripcion</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.descripcionpedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Observacion</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.observacionpedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center">
+                    <td class="py-2 bg-secondary text-light">Precio</td>
+                    <td class="py-2 bg-light">${{pedidoDetalle.valorpedido}}</td>
+                </tr>
+                <tr class="border-bottom border-secondary text-center" *ngIf="title.toLowerCase() =='pedidos entregados'">
+                    <td class="py-2 bg-secondary text-light">Estado</td>
+                    <td class="py-2 bg-light">{{pedidoDetalle.estadopedido}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="text-center container__title"  *ngIf="title.toLowerCase() =='pedidos pendientes'">
+        </div>
+    </div>
+</section>
+   
+
+
+

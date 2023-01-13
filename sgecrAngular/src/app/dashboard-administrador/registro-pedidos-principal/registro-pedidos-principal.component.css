@@ -1,0 +1,15 @@
+*{
+    font-family: 'Exo 2', sans-serif;
+}
+.container__material--table{
+    width: 90%;
+    margin:20px auto;
+}
+.container__bts--accion{
+  display:contents;
+}
+.title__table h3{
+    border-bottom: 3px solid #ffcb3b;
+    padding: 0px 20px 7px 20px;
+    color:#787878;
+}

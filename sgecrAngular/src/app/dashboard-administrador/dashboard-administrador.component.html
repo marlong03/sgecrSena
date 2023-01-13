@@ -1,0 +1,123 @@
+
+<header>
+    <div class="navbar navbar-expand-lg navbar-light ">
+        <img src="../../assets/imgs/logo2.png" alt="">
+
+      <button class="navbar-toggler p-2 bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon " ></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <section class="container__section--nav d-lg-none">
+
+            <nav class="">
+                <div class="container__login">
+                    <!-- <img src="../../assets/imgs/usuario.jpg" alt="foto persona"> -->
+                    <div class="img__user">{{inicialesNombre}}</div>
+                    <h4 class="text-center px-3">{{nombreUsuarioSesion.nombreusuario}}</h4>
+                    <div class="d-flex container__edit align-items-center" (click)="EditarUsuario()">   
+                        <input (click)="cerrarSesion()" type="button" class="btn btn-light px-3 py-1  my-2" value="Cerrar sesión" >
+                        <img src="../../assets/imgs/editar.png" alt="">
+                    </div>
+                </div>
+                <div class="container__modulos">
+                    <div class="d-flex justify-content-center ">
+                        <h3>Registro Pedidos</h3>
+                    </div>
+                    <ul (click)="obtenerTituloSection($event)"> 
+                        <li (click)="registroPedidosPrincipalId.llenarTablaPedidos('pendiente')">Pedidos Pendientes  </li>
+                        <li (click)="registroPedidosPrincipalId.llenarTablaPedidos('enviado')">Pedidos Enviados</li>
+                        <li (click)="registroPedidosPrincipalId.llenarTablaPedidos('entregado')">Pedidos Entregados</li>
+                        <li (click)="registroPedidosPrincipalId.llenarTablaPedidos('cancelado')">Pedidos Cancelados</li>
+                    </ul>
+                    <div class="d-flex justify-content-center ">
+                        <h3>Control Inventario</h3>
+                    </div>
+                    <ul  (click)="obtenerTituloSection($event)">
+                       <li (click)="changeStateInsumoTableState()">Listado de Insumos</li>
+                       <li >Listado de Productos</li>
+    
+                    </ul>
+                    <div class="d-flex justify-content-center ">
+                        <h3>Control Usuarios</h3>
+                    </div>
+                    <ul  (click)="obtenerTituloSection($event)">
+                        <li>Listado de Usuarios</li>
+                    </ul>
+                </div>
+            </nav>
+        </section>  
+      </div>
+    </div>
+    </header>
+<main>
+    <section class="section__nav--big">
+
+        <nav class="">
+            <div class="container__login">
+                <!-- <img src="../../assets/imgs/usuario.jpg" alt="foto persona"> -->
+                <div class="img__user">{{inicialesNombre}}</div>
+                <h4 class="text-center px-3">{{nombreUsuarioSesion.nombreusuario}}</h4>
+                <div class="d-flex container__edit align-items-center" (click)="EditarUsuario()">   
+                    <input (click)="cerrarSesion()" type="button" class="btn btn-light px-3 py-1  my-2" value="Cerrar sesión" >
+                    <img src="../../assets/imgs/editar.png" alt="">
+                </div>
+            </div>
+            <div class="container__modulos">
+                <div class="d-flex justify-content-center ">
+                    <h3>Registro Pedidos</h3>
+                </div>
+                <ul (click)="obtenerTituloSection($event)"> 
+                    <li (click)="graficas.llenarGrafica()">Estadisticas pedidos</li>
+                    <li (click)="registroPedidosPrincipalId.llenarTablaPedidos('pendiente')">Pedidos Pendientes  </li>
+                    <li (click)="registroPedidosPrincipalId.llenarTablaPedidos('enviado')">Pedidos Enviados</li>
+                    <li (click)="registroPedidosPrincipalId.llenarTablaPedidos('entregado')">Pedidos Entregados</li>
+                    <li (click)="registroPedidosPrincipalId.llenarTablaPedidos('cancelado')">Pedidos Cancelados</li>
+                </ul>
+                <div class="d-flex justify-content-center ">
+                    <h3>Control Inventario</h3>
+                </div>
+                <ul  (click)="obtenerTituloSection($event)">
+                   <li (click)="changeStateInsumoTableState()">Listado de Insumos</li>
+                   <li >Listado de Productos</li>
+                </ul>
+                <div class="d-flex justify-content-center ">
+                    <h3>Control Usuarios</h3>
+                </div>
+                <ul  (click)="obtenerTituloSection($event)">
+                    <li>Listado de Usuarios</li>
+                    <li>Listado de Roles</li>
+
+                </ul>
+            </div>
+        </nav>
+    </section>
+    
+<section class="container__section--left">
+    <div [style.display]="displayTablaPedidos">
+        <app-registro-pedidos-principal #registroPedidosPrincipalId [tituloSectionInput]="tituloSectionInput"></app-registro-pedidos-principal>
+    </div>
+    <div [style.display]="displayInventario">
+        <app-inventario [tituloSectionInput]="tituloSectionInput"></app-inventario>
+    </div>
+    <div [style.display]="displayProducto">
+        <app-producto [tituloSectionInput]="tituloSectionInput"></app-producto>
+    </div>
+
+    <div [style.display]="displayEditarUsuario">
+       <!--  <app-editar-usuario></app-editar-usuario> -->
+       <app-editar-perfil></app-editar-perfil>
+    </div>
+
+    <div [style.display]="displayTablaUsuarios">
+        <app-registro-usuarios [tituloSectionInput]="tituloSectionInput"></app-registro-usuarios>
+    </div>
+    <div [style.display]="displayTablaRoles">
+        <app-registro-roles [tituloSectionInput]="tituloSectionInput"></app-registro-roles>
+    </div>
+    <div [style.display]="displayGrafica">
+        <app-graficas  #graficas [tituloSectionInput]="tituloSectionInput"></app-graficas>
+    </div>
+ 
+</section>
+
+</main>

@@ -1,0 +1,24 @@
+<section class="inicioSesion__container">
+    <div class="divisionLogo">
+        <img src="../../../assets/imgs/logo.png" alt="">
+    </div>
+        <div class="container__inicioSesion">
+            <div class="d-flex justify-content-between">
+                <div class="mx-2">
+                    <p (click)="direccionarUrl('')"><span  class="py-2"><img width="25px" src="../../../assets/imgs/volver.png" alt=""></span></p>
+                </div>
+                <div>
+                    <h2>Inicio Sesión</h2>
+                </div>
+            </div>
+            <form class="form__login" >
+                <input type="email" placeholder="Email" id="emailCliente" name="email" [(ngModel)]="email"  >
+                <input type="password" placeholder="Contraseña"name="password" id="passwordCliente" [(ngModel)]="password">
+            </form>
+            <button type="button"class="btn " id="btnEnviarInicioSesionCliente" (click)="loginUsuario()">Enviar</button>
+            <p>¿No tienes una cuenta? <span (click)="direccionarUrl('registroCliente')">Registrate aquí</span></p>
+        </div>
+        <footer >
+        </footer>
+</section> 
+

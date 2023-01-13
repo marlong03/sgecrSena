@@ -1,0 +1,76 @@
+
+<div id="myModal" class="modal" [style.display]="displayBlock">
+    <div class="modal-content">
+        <span class="close" (click)="cerrarModal()">&times;</span>
+        <div class="d-flex justify-content-center">
+            <h3 class="subtitulo text-center mb-2 mt-0">PEDIDO</h3>
+        </div>
+        <section class="text__carritoVacio d-flex justify-content-center" *ngIf="listaOrden.length < 1">
+          <h1 class="text-light my-5">Tu carrito esta vacio 😅</h1>
+        </section>
+        <section *ngIf="listaOrden.length > 0">
+          <div class="text-center d-flex justify-content-center mt-3 ">
+            <small class="text-light">¡Asi se ve tu pedido! </small>
+          </div>
+          <div class=" my-4 " >
+            <section class="d-flex justify-content-center flex-column align-items-center my-4 " >
+                <div class="mat-elevation-z8 w-75 "  >
+                    <table mat-table  [dataSource]="listaOrdenDataSource" matSort class="w-100 bg-dark"> 
+                      <ng-container matColumnDef="nombreproducto">
+                          <th mat-header-cell *matHeaderCellDef > nombre </th>
+                          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="cantidadproducto" >
+                        <th mat-header-cell *matHeaderCellDef>Cantidad </th>
+                        <td mat-cell *matCellDef="let element">{{element.cantidad}}</td>
+                      </ng-container>
+                      <ng-container matColumnDef="valorproducto">
+                          <th mat-header-cell *matHeaderCellDef >valor </th>
+                          <td mat-cell *matCellDef="let element">${{element.valorTotal}}</td>
+                      </ng-container>
+                      <ng-container matColumnDef="Acciones">
+                          <th mat-header-cell *matHeaderCellDef >Acciones </th>
+                          <td mat-cell *matCellDef="let element"><img (click)="eliminarProductoDeOrden($event)"class="btn__borrar"src="../../../assets/imgs/basura.png" alt="borrar producto de la orden"> </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumnsOrden"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumnsOrden;"></tr>
+                    </table>
+                    <div class="d-flex justify-content-between my-3 container__totals">
+                      <div>
+                        <p class="mx-4 text-warning">Total</p>
+                      </div>
+                      <div>
+                        <p class="mx-5 text-warning"><span>$ </span >{{valorTotalOrdenes}}</p>
+                      </div>                    
+                    </div>
+                  </div>
+            </section>
+            <div class="d-flex justify-content-center mb-4">
+              <h3 class="subtitulo text-center mb-2 mt-0 ">DETALLES DE PEDIDO </h3>
+          </div>
+            <section class="detallesPedido d-flex justify-content-center flex-wrap align-items-center">
+              <div class="d-flex justify-content-center">
+                <select name="destinoEscogido" [(ngModel)]="destinoEscogido" (change)="cambiarTextoDetalleDestino()" id="" class="form-select form-select-sm py-2  m-auto mx-3 px-4 bg-dark text-light selectDestino ">
+                  <option value="">Seleccionar Destino*</option>
+                  <option value="mesa">Mesa</option>
+                  <option value="domicilio">Domicilio</option>
+                  <option value="recoge">Recoger en tienda</option>
+                </select>
+                <input type="text" class=" form-control px-4 py-2 m-3 bg-dark text-light" [style.display]="displayDetalleDestino" placeholder="{{detalleDestinoPlaceholder}}*" value="{{detalleDestinoValue}}"  [(ngModel)]="detalleDestinoValue" name="detalleDestinoValue" >
+              </div>
+              <div class="d-flex justify-content-center align-items-center">
+                <input type="text" class=" form-control px-4 py-2 m-3 bg-dark text-light"  maxlength="50" placeholder="Observacion" [(ngModel)]="observacion" name="observacion">
+                <input type="text" class=" form-control px-4 py-2 m-3 bg-dark text-light" placeholder="Telefono" value="{{telefonoEnvioPedido}}">
+              </div>
+            </section>
+            <div class="d-flex justify-content-center ">
+              <small class="text-light">(*) - Campo obligatorio</small>
+              </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <input type="button" value="Crear Pedido" class="btn btn-light text-dark px-5 py-2 mt-4 mb-2" (click)="crearPedido()">
+            </div>
+    </div>
+  </section>
+  </div>
+</div>
+

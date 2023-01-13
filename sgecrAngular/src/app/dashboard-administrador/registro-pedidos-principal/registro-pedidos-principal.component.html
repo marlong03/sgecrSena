@@ -1,0 +1,94 @@
+<section class="container__material--table ">
+  <div class="title__table d-flex justify-content-center">
+    <h3>{{tituloSectionInput}}</h3>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mx-3">
+      <mat-form-field >
+          <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="filtrarPedidos($event)" placeholder="Buscar">
+  </mat-form-field>
+  <div class="d-flex">
+    <div class="">
+      <input type="button" value="Exp PDF" class="btn btn-danger mx-1" (click)="generarPdf('excel-table-pedidos')">
+      <input type="button" value="Exp Excel" class="btn btn-success"  (click)="exportexcel()">
+    </div>
+    <div>
+      <app-anadir-pedido (textoEmitido)="actualizar($event)"></app-anadir-pedido>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center m-5" *ngIf="listaPedidos.length == 0">
+  <h2 >No tienes {{tituloSectionInput}} 😅</h2>
+</div>
+<div  >
+<div class="mat-elevation-z8" >
+  <table mat-table [dataSource]="listaPedidosDataSource" matSort class="w-100" id="excel-table-pedidos" > 
+      <ng-container matColumnDef="referenciapedido">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Referencia </th>
+          <td mat-cell *matCellDef="let element"> {{element.referenciapedido}} </td>
+      </ng-container>
+      <ng-container matColumnDef="descripcionpedido">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Descripcion </th>
+        <td mat-cell *matCellDef="let element"> {{element.descripcionpedido}} </td>
+      </ng-container>
+      <ng-container matColumnDef="telefonopedido">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Telefono </th>
+        <td mat-cell *matCellDef="let element"> {{element.telefonopedido}} </td>
+      </ng-container>
+      <ng-container matColumnDef="destinopedido" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Destino</th>
+        <td mat-cell *matCellDef="let element">{{element.destinopedido}} </td>
+      </ng-container>
+      <ng-container matColumnDef="detalledestinopedido" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalle destino</th>
+          <td mat-cell *matCellDef="let element">{{element.detalledestinopedido}} </td>
+        </ng-container>
+      <ng-container matColumnDef="valorpedido" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor</th>
+          <td mat-cell *matCellDef="let element"><div>${{element.valorpedido}}</div> </td>
+        </ng-container>
+      <ng-container matColumnDef="observacionpedido" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Observacion</th>
+          <td mat-cell *matCellDef="let element"> <div>{{element.observacionpedido}}</div>  </td>
+        </ng-container>
+        <ng-container matColumnDef="estadopedido" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+          <td mat-cell *matCellDef="let element"> <div>{{element.estadopedido}}</div> </td>
+        </ng-container>
+        <ng-container matColumnDef="fechapedido" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+          <td mat-cell *matCellDef="let element" > <div>{{element.fechapedido}}</div>  </td>
+        </ng-container>
+        <ng-container matColumnDef="fk_iddomiciliario" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> domiciliario </th>
+          <td  mat-cell *matCellDef="let element" > 
+          <div *ngIf="element.destinopedido.toLowerCase() == 'domicilio'">
+            <div *ngIf="element.fk_iddomiciliario != 0">
+              <p>{{element.fk_iddomiciliario}} </p>
+            </div>
+            <div *ngIf="element.fk_iddomiciliario == 0">
+              <select class="form-select form-select-sm " (change)="seleccionarDomiciliarioFunction($event)" aria-label=".form-select-lg example"  name="seleccionarDomiciliario" [(ngModel)]="seleccionarDomiciliario"  id="seleccionarDomiciliario">
+                <option  value="{{domi.nombreusuario}}" *ngFor="let domi of listaDomiciliariosDisponibles">{{domi.nombreusuario}}</option>
+              </select> 
+            </div> 
+          </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="accion"  >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>acciones </th>
+          <td class=" tdMod d-flex justify-content-between align-items-center" mat-cell *matCellDef="let element">
+            <div class="container__bts--accion d-flex justify-content-center flex-nowrap align-items-center" *ngIf="element.estadopedido == 'pendiente'">
+                <button class="btn btn-danger m-3 py-1 px-2 " (click)="cancelarPedido($event)"><img src="../../../assets/imgs/cerrar.png" alt="" width="20px"></button>
+                <button class=" btn btn-success py-1 px-2  " *ngIf="element.fk_iddomiciliario != 0 && element.destinopedido =='domicilio' || element.destinopedido != 'domicilio'"  (click)="enviarPedido($event,element.destinopedido)"><img src="../../../assets/imgs/enviar-mensaje.png" alt="" width="20px"></button>
+            </div>
+          </td>
+            </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsPedido"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsPedido;"></tr>
+  </table>
+    <mat-paginator [pageSizeOptions]="[3,5,10,20]" showFirstLastButtons 
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+</div>
+</section>

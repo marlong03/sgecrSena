@@ -1,0 +1,15 @@
+<section class="d-flex justify-content-center align-items-center flex-column-center"></section>
+<div class="d-flex justify-content-center mt-3">
+  <h3 class="title">{{tituloSectionInput}}</h3>
+</div>
+<div class="d-flex justify-content-center w-100">
+<ngx-charts-advanced-pie-chart
+  [view]="view"
+  [results]="singleFuera"
+  [gradient]="gradient"
+  (select)="onSelect($event)"
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate($event)"
+  >
+</ngx-charts-advanced-pie-chart>
+</div>

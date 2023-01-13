@@ -1,0 +1,73 @@
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { PedidoService } from '../services/pedido.service';
+
+@Component({
+  selector: 'app-dashboard-domiciliario',
+  templateUrl: './dashboard-domiciliario.component.html',
+  styleUrls: ['./dashboard-domiciliario.component.css']
+})
+export class DashboardDomiciliarioComponent implements OnInit {
+
+  usuarioSesion =  JSON.parse(localStorage.getItem("usuario") || "[]")
+  idDomiciliario:number = 0;
+  displayon = 'none';
+  displayPedidosDomiciliario = "block";
+  displayEditarPerfil = "none";
+  abrirComponenteEditarPerfil(){
+    this.displayPedidosDomiciliario = "none";
+    this.displayEditarPerfil = "block";
+  }
+  cerrarNavbar(event:any){
+    let palabra = event.path[0].childNodes[0].data;
+    if(palabra.toLowerCase() == 'pedidos pendientes' 
+        || palabra.toLowerCase() == 'pedidos entregados' ){
+      this.displayEditarPerfil = "none";
+      this.displayPedidosDomiciliario = "block";
+    }
+    if(this.displayon == 'block'){
+      this.displayon = 'none';
+    }
+    else if(this.displayon == 'none'){
+      this.displayon = 'block';
+    }
+  }
+  ejecutarNavbar(){
+    if(this.displayon == 'block'){
+      this.displayon = 'none';
+    }
+    else if(this.displayon == 'none'){
+      this.displayon = 'block';
+    }
+  }
+  cerrarSesion(){
+    Swal.fire(
+      'Cerraste sesion',
+      '¡Nos vemos pronto!',
+      'success'
+      ).then((x)=>{
+      localStorage.removeItem('usuario')
+      this.router.navigate(['/'])
+    })
+  }
+  constructor(private pedidoService:PedidoService,
+    private router:Router,
+    private cd:ChangeDetectorRef ) { }
+  ngOnInit(): void {
+    if(localStorage.getItem('usuario') == null){
+      this.router.navigate(['/'])
+    }else{
+      let user = JSON.parse(localStorage.getItem('usuario') || "[]")
+      if(user.codigoempresarial.toLowerCase() == "domi"){
+        this.router.navigate(['/dashboardDomi'])
+      }else{
+        this.router.navigate(['/'])
+      }
+    }
+  }
+  ngAfterViewInit(): void { 
+    this.cd.detectChanges()
+  }
+}
+  
